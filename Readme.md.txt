@@ -1,0 +1,1 @@
+Nobody has a problem if people keep dying from inside as long as they keep quit. And the moment people write about their sadness, someone ridicules them for spreading negativity. A generation of heartless jokers, that's what we 've become. Don't feel. Don't express. Don't cry. Here is a meme, just laugh.
