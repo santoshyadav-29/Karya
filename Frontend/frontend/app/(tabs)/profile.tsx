@@ -1,14 +1,22 @@
-import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { useAuth } from "@clerk/clerk-expo";
+import { Link } from "expo-router";
+import React from "react";
+import { StyleSheet, View, Text, Button } from "react-native";
 
-const Explore = () => {
-    return (
-        <View>
-            <Text>Profile</Text>
-        </View>
-    );
-}
+const Page = () => {
+  const { signOut, isSignedIn } = useAuth();
+  return (
+    <View>
+      <Button title="Log Out" onPress={() => signOut()} />
+      {!isSignedIn && (
+        <Link href={"/(modals)/login"}>
+          <Text>Login</Text>
+        </Link>
+      )}
+    </View>
+  );
+};
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
 
-export default Explore;
+export default Page;
