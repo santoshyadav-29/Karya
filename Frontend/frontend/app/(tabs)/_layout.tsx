@@ -32,17 +32,7 @@ const Layout = () => {
           ),
         }}
       />
-      <Tabs.Screen
-        name="wishlists"
-        options={{
-          tabBarLabel: "Wishlists",
-          tabBarIcon: () => (
-            <View>
-              <Text>📝</Text>
-            </View>
-          ),
-        }}
-      />
+     
       <Tabs.Screen
         name="profile"
         options={{
@@ -58,10 +48,14 @@ const Layout = () => {
       <Tabs.Screen
         name="settings"
         options={{
-          tabBarLabel: "Settings",
+          tabBarLabel: "About Us",
+          title: "",
+
           tabBarIcon: () => (
             <View>
-              <Text>⚙️</Text>
+              <Text>
+                📄
+              </Text>
             </View>
           ),
         }}

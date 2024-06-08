@@ -1,145 +1,162 @@
-import { useWarmUpBrowser } from "@/hooks/useWarmUpBrowser";
-import React from "react";
-import Colors from "@/constants/Colors";
-import { useOAuth } from "@clerk/clerk-expo";
-import { useRouter } from "expo-router";
+import * as React from "react";
+import { Text, TextInput, TouchableOpacity, View, StyleSheet } from "react-native";
+import { useSignUp } from "@clerk/clerk-expo";
 
-import {
-  View,
-  StyleSheet,
-  TextInput,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+export default function SignUpScreen() {
+  const { isLoaded, signUp, setActive } = useSignUp();
 
-import { defaultStyles } from "@/constants/Styles";
-import { Ionicons } from "@expo/vector-icons";
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [emailAddress, setEmailAddress] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [pendingVerification, setPendingVerification] = React.useState(false);
+  const [code, setCode] = React.useState("");
 
-enum Strategy {
-  Google = "oauth_google",
-
-  Facebook = "oauth_facebook",
-}
-
-const Login = () => {
-  // useWarmUpBrowser();
-  const router = useRouter();
-  const { startOAuthFlow: googleAuth } = useOAuth({ strategy: "oauth_google" });
-  const { startOAuthFlow: facebookAuth } = useOAuth({
-    strategy: "oauth_facebook",
-  });
-
-  const onSelectAuth = async (strategy: Strategy) => {
-    const selectedAuth = {
-      [Strategy.Google]: googleAuth,
-      [Strategy.Facebook]: facebookAuth,
-    }[strategy];
+  // start the sign up process.
+  const onSignUpPress = async () => {
+    if (!isLoaded) {
+      return;
+    }
 
     try {
-      const { createdSessionId, setActive } = await selectedAuth();
+      await signUp.create({
+        firstName,
+        lastName,
+        emailAddress,
+        password,
+      });
 
-      if (createdSessionId) {
-        setActive!({ session: createdSessionId });
-        router.back();
-      }
-    } catch (err) {
-      console.error("OAuth error", err);
+      // send the email.
+      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+
+      // change the UI to our pending section.
+      setPendingVerification(true);
+    } catch (err: any) {
+      console.error(JSON.stringify(err, null, 2));
+    }
+  };
+
+  // This verifies the user using email code that is delivered.
+  const onPressVerify = async () => {
+    if (!isLoaded) {
+      return;
+    }
+
+    try {
+      const completeSignUp = await signUp.attemptEmailAddressVerification({
+        code,
+      });
+
+      await setActive({ session: completeSignUp.createdSessionId });
+    } catch (err: any) {
+      console.error(JSON.stringify(err, null, 2));
     }
   };
 
   return (
     <View style={styles.container}>
-      <TextInput
-        autoCapitalize="none"
-        placeholder="Email"
-        style={[defaultStyles.inputField, { marginBottom: 30 }]}
-      />
-
-      <TouchableOpacity style={defaultStyles.btn}>
-        <Text style={defaultStyles.btnText}>Continue</Text>
-      </TouchableOpacity>
-
-      <View style={styles.seperatorView}>
-        <View
-          style={{
-            flex: 1,
-            borderBottomColor: "black",
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <Text style={styles.seperator}>or</Text>
-        <View
-          style={{
-            flex: 1,
-            borderBottomColor: "black",
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-      </View>
-      <View style={{ gap: 20 }}>
-        <TouchableOpacity
-          style={styles.btnOutline}
-          onPress={() => onSelectAuth(Strategy.Google)}
-        >
-          <Ionicons
-            name="logo-google"
-            size={24}
-            style={defaultStyles.btnIcon}
-          />
-          <Text style={styles.btnOutlineText}>Continue with Google</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.btnOutline}
-          onPress={() => onSelectAuth(Strategy.Facebook)}
-        >
-          <Ionicons
-            name="logo-facebook"
-            size={24}
-            style={defaultStyles.btnIcon}
-          />
-
-          <Text style={styles.btnOutlineText}>Continue with Facebook</Text>
-        </TouchableOpacity>
-      </View>
+      {!pendingVerification && (
+        <View>
+          <Text style={styles.title}>Sign Up</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              value={firstName}
+              placeholder="First Name"
+              placeholderTextColor="#888"
+              onChangeText={(firstName) => setFirstName(firstName)}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              value={lastName}
+              placeholder="Last Name"
+              placeholderTextColor="#888"
+              onChangeText={(lastName) => setLastName(lastName)}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              value={emailAddress}
+              placeholder="Email"
+              placeholderTextColor="#888"
+              onChangeText={(email) => setEmailAddress(email)}
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              value={password}
+              placeholder="Password"
+              placeholderTextColor="#888"
+              secureTextEntry={true}
+              onChangeText={(password) => setPassword(password)}
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={onSignUpPress}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {pendingVerification && (
+        <View>
+          <Text style={styles.title}>Verify Email</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              value={code}
+              placeholder="Code"
+              placeholderTextColor="#888"
+              onChangeText={(code) => setCode(code)}
+            />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={onPressVerify}>
+            <Text style={styles.buttonText}>Verify Email</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    padding: 26,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: "#f5f5f5",
   },
-
-  seperatorView: {
-    flexDirection: "row",
-    gap: 10,
-    alignItems: "center",
-    marginVertical: 30,
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
   },
-  seperator: {
-    fontFamily: "mon-sb",
-    color: Colors.grey,
-    fontSize: 16,
+  inputContainer: {
+    marginBottom: 15,
   },
-  btnOutline: {
-    backgroundColor: "#fff",
-    borderWidth: 1,
-    borderColor: Colors.grey,
+  input: {
     height: 50,
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    backgroundColor: "#fff",
+  },
+  button: {
+    backgroundColor: "#4CAF50",
+    paddingVertical: 15,
     borderRadius: 8,
     alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    paddingHorizontal: 10,
   },
-  btnOutlineText: {
-    color: "#000",
+  buttonText: {
+    color: "#fff",
     fontSize: 16,
-    fontFamily: "mon-sb",
+    fontWeight: "bold",
   },
 });
-
-export default Login;
