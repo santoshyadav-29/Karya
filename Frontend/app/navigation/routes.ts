@@ -5,9 +5,9 @@ enum routes {
   HISTORY = "History",
   CHAT = "Chat",
   OFFERS = "Offers",
-  SCHEDULE_RIDE = "ScheduleRide ",
+  SCHEDULE_RIDE = "ScheduleTask ",
   SOS = "SOS",
-  HOME_OF_RIDER = "HomeOfRider",
+  HOME_OF_RIDER = "HomeOfServiceProviders",
 }
 
 export default routes;

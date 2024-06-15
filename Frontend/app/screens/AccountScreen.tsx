@@ -61,10 +61,10 @@ export default function AccountScreen({
                 options: [
                   {
                     dropdown: true,
-                    title: "Rider Mode",
+                    title: "Service Mode",
                     subTitle: (
                       <AppSwitch
-                        label="Rider Mode"
+                        label="Service Mode"
                         value={riderMode === true}
                         onValueChange={(newValue) => {
                           setRiderMode(newValue);

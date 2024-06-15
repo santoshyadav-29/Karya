@@ -314,11 +314,11 @@ export default function HomeOfRiderScreen({
               <View className="my-2 flex-row items-start">
                 <TouchableOpacity
                   accessibilityRole="button"
-                  aria-label="Cancel Ride"
+                  aria-label="Cancel Service Request"
                   onPress={() => {
                     Alert.alert(
-                      "Cancel Ride",
-                      "Are you sure you want to cancel this ride?",
+                      "Cancel Service Request",
+                      "Are you sure you want to cancel this service?",
                       [
                         {
                           text: "Cancel",
@@ -349,7 +349,7 @@ export default function HomeOfRiderScreen({
                     />
                   </View>
                   <AppText className="text-center text-[#c93a3a] mt-2">
-                    Cancel Ride
+                    Cancel Service
                   </AppText>
                 </TouchableOpacity>
                 <TouchableOpacity
@@ -442,7 +442,7 @@ export default function HomeOfRiderScreen({
           {buttomSheetState === RiderBottomSheetState.RIDE_ONGOING && (
             <View className="px-5">
               <View className="mb-2 flex-row justify-center">
-                <AppText className="text-xl">Ride Ongoing</AppText>
+                <AppText className="text-xl"> Service Started</AppText>
               </View>
               <ListItemSeparator />
               <View className="my-2 py-1 flex-row justify-between">
@@ -482,7 +482,7 @@ export default function HomeOfRiderScreen({
                 <View className="my-2 flex-row items-center">
                   <TouchableOpacity
                     accessibilityRole="button"
-                    aria-label="Share Ride Progress"
+                    aria-label="Share Progress"
                     onPress={() => {
                       Share.share({
                         message: `I am on my way to ${selectedPassenger?.destinationLocation?.title} from ${selectedPassenger?.pickupLocation?.title}.`,
@@ -517,11 +517,11 @@ export default function HomeOfRiderScreen({
               <AppButton
                 color="bg-[#7bba89]"
                 textColor="text-white"
-                title="Ride Completed"
+                title="Task Completed"
                 onPress={() => {
                   Alert.alert(
-                    "Ride Completed",
-                    "The ride was successfully marked as completed.",
+                    "Task Completed",
+                    "The task was successfully marked as completed.",
                     [{ text: "OK" }],
                     { cancelable: false }
                   );

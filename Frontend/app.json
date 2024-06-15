@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "Tootle by RevampRovers",
-    "slug": "tootle-by-revamprovers",
-    "scheme": "rrtootle",
+    "name": "karya",
+    "slug": "karya",
+    "scheme": "karya",
     "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
     "splash": {
       "image": "./app/assets/splash.png",
-      "resizeMode": "cover",
+      "resizeMode": "contain",
       "backgroundColor": "#fff"
     },
     "assetBundlePatterns": [
@@ -24,7 +24,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./app/assets/adaptive-icon.png",
+        "foregroundImage": "./app/assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.revamprovers.tootle",

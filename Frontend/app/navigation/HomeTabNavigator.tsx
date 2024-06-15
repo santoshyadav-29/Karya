@@ -12,6 +12,7 @@ import AccountScreen from "../screens/AccountScreen";
 import { useBearStore } from "../store";
 import HomeOfRiderScreen from "../screens/HomeOfRiderScreen";
 
+
 export type HomeTabNavigatorParamList = {
   [routes.HOME]: {
     promo: Promo | null;
@@ -28,7 +29,9 @@ interface TabIconProps {
 }
 
 const tabToolsIcon = ({ color, size }: TabIconProps) => (
-  <MaterialCommunityIcons color={color} name="car" size={size} />
+  // <MaterialCommunityIcons color={color} name="hand" size={size} />
+  <Ionicons name="home" color={color} size={size} />
+
 );
 
 const tabAccountIcon = ({ color, size }: TabIconProps) => (

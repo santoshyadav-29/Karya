@@ -75,7 +75,7 @@ export default function AppNavigator() {
         options={{
           headerShown: true,
           headerBackTitle: "Back",
-          title: "Schedule Ride",
+          title: "Schedule Task",
         }}
         component={ScheduleRideScreen}
         name={routes.SCHEDULE_RIDE}

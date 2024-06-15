@@ -170,7 +170,7 @@ const rides = [
     pickLocation: "City Park",
     dropLocation: "Example City",
     riderName: "John Doe",
-    vehicleName: "Pulsar 200",
+    vehicleName: "",
   },
   {
     id: 2,
@@ -179,7 +179,7 @@ const rides = [
     pickLocation: "Nagarjun,Budhanilkantha",
     dropLocation: "Lagankhel,Lalitpur",
     riderName: "Jane Doe",
-    vehicleName: "Pulsar 200",
+    vehicleName: "",
   },
   {
     id: 3,
@@ -188,7 +188,7 @@ const rides = [
     pickLocation: "Downtown",
     dropLocation: "Example City",
     riderName: "Bob Smith",
-    vehicleName: "Motorcycle",
+    vehicleName: "",
   },
   {
     id: 4,
@@ -197,7 +197,7 @@ const rides = [
     pickLocation: "Mountain Trail",
     dropLocation: "Example City",
     riderName: "Alice Johnson",
-    vehicleName: "Electric Skateboard",
+    vehicleName: "",
   },
   {
     id: 5,
@@ -206,7 +206,7 @@ const rides = [
     pickLocation: "Nagarjun,Budhanilkantha",
     dropLocation: "Example City",
     riderName: "Charlie Brown",
-    vehicleName: "Pulsar 200",
+    vehicleName: "",
   },
   {
     id: 6,
@@ -215,7 +215,7 @@ const rides = [
     pickLocation: "Industrial Area",
     dropLocation: "Example City",
     riderName: "Eva Miller",
-    vehicleName: "Skateboard",
+    vehicleName: "",
   },
   {
     id: 7,
@@ -224,7 +224,7 @@ const rides = [
     pickLocation: "Rural Trail",
     dropLocation: "Example City",
     riderName: "David White",
-    vehicleName: "Mountain Bike",
+    vehicleName: "",
   },
   {
     id: 8,
@@ -233,7 +233,7 @@ const rides = [
     pickLocation: "Nagarjun,Budhanilkantha",
     dropLocation: "Example City",
     riderName: "Sophia Davis",
-    vehicleName: "Pulsar 200",
+    vehicleName: "",
   },
   {
     id: 9,
@@ -242,7 +242,7 @@ const rides = [
     pickLocation: "Shopping District",
     dropLocation: "Example City",
     riderName: "Michael Wilson",
-    vehicleName: "Segway",
+    vehicleName: "",
   },
   {
     id: 10,
@@ -251,7 +251,7 @@ const rides = [
     pickLocation: "Lake Shore",
     dropLocation: "Example City",
     riderName: "Olivia Turner",
-    vehicleName: "Rowboat",
+    vehicleName: "",
   },
   {
     id: 11,
@@ -260,7 +260,7 @@ const rides = [
     pickLocation: "Nagarjun,Budhanilkantha",
     dropLocation: "Lagankhel,Lalitpur",
     riderName: "Jane Doe",
-    vehicleName: "Pulsar 200",
+    vehicleName: "",
   },
   {
     id: 12,
@@ -269,7 +269,7 @@ const rides = [
     pickLocation: "Nagarjun,Budhanilkantha",
     dropLocation: "Lagankhel,Lalitpur",
     riderName: "Jane Doe",
-    vehicleName: "Pulsar 200",
+    vehicleName: "",
   },
   {
     id: 13,
@@ -278,6 +278,6 @@ const rides = [
     pickLocation: "Nagarjun,Budhanilkantha",
     dropLocation: "Lagankhel,Lalitpur",
     riderName: "Jane Doe",
-    vehicleName: "Pulsar 200",
+    vehicleName: "",
   },
 ];

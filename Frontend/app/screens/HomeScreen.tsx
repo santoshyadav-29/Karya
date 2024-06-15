@@ -44,22 +44,18 @@ import { ScrollView } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 enum ServiceType {
-  BIKE = "BIKE",
-  CAR = "CAR",
   DELIVERY = "DELIVERY",
-}
-
-enum NotePromoChoice {
-  NOTE = "NOTE",
-  PROMO = "PROMO",
+  PLUMBER = "PLUMBER",
+  ELECTRICIAN = "ELECTRICIAN",
+  BARBER = "BARBER",
 }
 
 const imageMap = {
-  [ServiceType.BIKE]: require("../assets/bike.png"),
-  [ServiceType.CAR]: require("../assets/car.png"),
+  [ServiceType.BARBER]: require("../assets/barber.png"),
   [ServiceType.DELIVERY]: require("../assets/delivery.png"),
+  [ServiceType.PLUMBER]: require("../assets/plumber.png"),
+  [ServiceType.ELECTRICIAN]: require("../assets/electrician.png"),
 };
-
 export default function HomeScreen({
   route,
 }: {
@@ -75,14 +71,18 @@ export default function HomeScreen({
   const [counter, setCounter] = useState<number>(10);
   const [counter2, setCounter2] = useState<number>(10);
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
-  const [notePromo, setNotePromo] = useState<NotePromoChoice | null>(null);
+  const [notePromo, setNotePromo] = useState<"Note" | "Promo" | null | null>(
+    null
+  );
   const [promoInput, setPromoInput] = useState<string>("");
   const [noteInput, setNoteInput] = useState<string>("");
   const [pickupLocationModelVisible, setPickupLocationModelVisible] =
     useState(false);
   const [destinationLocationModelVisible, setDestinationLocationModelVisible] =
     useState(false);
-  const [serviceType, setServiceType] = useState<ServiceType>(ServiceType.BIKE);
+  const [serviceType, setServiceType] = useState<ServiceType>(
+    ServiceType.BARBER
+  );
   const [mapTouched, setMapTouched] = useState(false);
   const [ridePriceInput, setRidePriceInput] = useState<string>("200");
   const [pickupLocation, setPickupLocation] = useState<Place | null>(
@@ -117,7 +117,7 @@ export default function HomeScreen({
         : buttomSheetState === BottomSheetState.RIDE_ONGOING
         ? [268]
         : buttomSheetState === BottomSheetState.RIDE_COMPLETED
-        ? [640]
+        ? [640] 
         : [0],
     [buttomSheetState, ridersLength]
   );
@@ -455,7 +455,7 @@ export default function HomeScreen({
               </View>
               <View className="flex-row gap-3 px-5 mt-0">
                 <AppButton
-                  title="Schedule Ride"
+                  title="Schedule Task"
                   className="flex-1"
                   onPress={() => {
                     navigate(routes.SCHEDULE_RIDE, {
@@ -467,7 +467,7 @@ export default function HomeScreen({
                 />
                 <AppButton
                   textColor="text-white"
-                  title="Book Ride"
+                  title="Book Service"
                   className="flex-1 bg-primary"
                   onPress={() => {
                     if (!pickupLocation || !destinationLocation) {
@@ -517,7 +517,7 @@ export default function HomeScreen({
                   className="flex-1"
                   title={`Note ${noteInput ? "✓" : ""}`}
                   onPress={() => {
-                    setNotePromo(NotePromoChoice.NOTE);
+                    setNotePromo("Promo");
                   }}
                 />
                 <AppButton
@@ -525,7 +525,7 @@ export default function HomeScreen({
                   className="flex-1"
                   title={`Promo ${promoInput ? "✓" : ""}`}
                   onPress={() => {
-                    setNotePromo(NotePromoChoice.PROMO);
+                    setNotePromo("Note");
                   }}
                 />
               </View>
@@ -581,7 +581,7 @@ export default function HomeScreen({
                 />
                 <AppButton
                   textColor="text-white"
-                  title="Book Ride"
+                  title="Book Service"
                   className="flex-1 bg-primary"
                   onPress={() => {
                     setArtificalLoading(true);
@@ -662,7 +662,7 @@ export default function HomeScreen({
           {buttomSheetState === BottomSheetState.RIDE_FOUND && (
             <View className="px-5">
               <View className="mb-2 flex-row justify-between">
-                <AppText className="text-xl">Driver is on the way</AppText>
+                <AppText className="text-xl">Person is on the way</AppText>
                 <AppText className="text-primary font-bold text-xl">
                   0:{counter < 10 ? `0${counter}` : counter}
                 </AppText>
@@ -712,12 +712,12 @@ export default function HomeScreen({
               <ListItemSeparator />
               <View className="m-2">
                 <AppText className="text-xl">
-                  {serviceType === ServiceType.CAR ? "Car" : "Bike"} details:
+                  {serviceType === ServiceType.BARBER ? "Mid-level" : "Professional"} details:
                 </AppText>
 
                 <AppText className="font-bold text-xl">
-                  {serviceType === ServiceType.CAR ? "SUZUKI" : "YAMAHA FZ-S"}-
-                  Ba. 1 Pa. 1234
+                  {serviceType === ServiceType.PLUMBER ? "Certified" : "Professional"}-
+                  40 Task completed
                 </AppText>
               </View>
               <ListItemSeparator />
@@ -752,7 +752,7 @@ export default function HomeScreen({
               <View className="my-2 flex-row items-center">
                 <AppButton
                   textColor="text-white"
-                  title="Cancel Ride"
+                  title="Cancel Service"
                   className="flex-1 bg-[#c93a3a]"
                   onPress={() => {
                     setCancelModalOpen(true);
@@ -760,7 +760,7 @@ export default function HomeScreen({
                 />
                 <TouchableOpacity
                   accessibilityRole="button"
-                  aria-label="Call Driver"
+                  aria-label="Call"
                   onPress={() => {
                     Linking.openURL(
                       `tel:${Math.floor(Math.random() * 10000000000)}`
@@ -776,7 +776,7 @@ export default function HomeScreen({
                 </TouchableOpacity>
                 <TouchableOpacity
                   accessibilityRole="button"
-                  aria-label="Chat with Driver"
+                  aria-label="Chat"
                   onPress={() => {
                     navigate(routes.CHAT, {});
                   }}
@@ -794,7 +794,7 @@ export default function HomeScreen({
           {buttomSheetState === BottomSheetState.RIDE_ONGOING && (
             <View className="px-5">
               <View className="mb-2 flex-row justify-center">
-                <AppText className="text-xl">Ride Ongoing</AppText>
+                <AppText className="text-xl"> Task Ongoing</AppText>
               </View>
               <ListItemSeparator />
               <View className="my-2 py-1 flex-row justify-between">
@@ -870,7 +870,7 @@ export default function HomeScreen({
                 <View className="my-2 flex-row items-center">
                   <TouchableOpacity
                     accessibilityRole="button"
-                    aria-label="Share Ride Progress"
+                    aria-label="Share Progress"
                     onPress={() => {
                       Share.share({
                         message: `I am on my way to ${destinationLocation?.title} from ${pickupLocation?.title}.`,
@@ -911,7 +911,7 @@ export default function HomeScreen({
               className="px-5"
             >
               <View className="mb-2 flex-row justify-center">
-                <AppText className="text-xl">Ride Completed</AppText>
+                <AppText className="text-xl">Task Completed</AppText>
               </View>
               <ListItemSeparator />
               <View className="my-2 py-1 flex-row justify-between">
@@ -1039,7 +1039,7 @@ export default function HomeScreen({
             index={0}
             onChange={(index: number) => {
               if (index === 0 || index === -1) {
-                if (promoInput && notePromo === NotePromoChoice.PROMO) {
+                if (promoInput && notePromo === "Promo") {
                   const offer = offers.find(
                     (offer) => offer.code === promoInput
                   )?.code;
@@ -1065,7 +1065,7 @@ export default function HomeScreen({
             }}
           >
             <View className="px-5">
-              {notePromo === NotePromoChoice.NOTE ? (
+              {notePromo === "Promo" ? (
                 <>
                   <View className="m-2 mb-0 flex-row justify-between">
                     <AppText className="text-xl">Add a Note</AppText>
@@ -1086,7 +1086,7 @@ export default function HomeScreen({
                   />
                 </>
               ) : null}
-              {notePromo === NotePromoChoice.PROMO ? (
+              {notePromo === "Promo" ? (
                 <>
                   <View className="m-2 mb-0 flex-row justify-between">
                     <AppText className="text-xl">Add a Promo Code</AppText>

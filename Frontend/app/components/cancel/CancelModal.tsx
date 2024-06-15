@@ -11,16 +11,16 @@ import Constants from "expo-constants";
 export enum ButtomSheetState {
   LOCATION_PICKER = "LOCATION_PICKER",
   PAYMENT_METHOD = "PAYMENT_METHOD",
-  RIDERS_LIST = "RIDERS_LIST",
+  RIDERS_LIST = "Service List",
   RIDE_FOUND = "RIDE_FOUND",
-  RIDE_ONGOING = "RIDE_ONGOING",
-  RIDE_COMPLETED = "RIDE_COMPLETED",
+  RIDE_ONGOING = "Service Ongoing",
+  RIDE_COMPLETED = "Service Completed",
 }
 
 export enum RiderBottomSheetState {
   PASSENGER_REQUEST_LIST = "PASSENGER_REQUEST_LIST",
-  RIDE_SELECTED = "RIDE_SELECTED",
-  RIDE_ONGOING = "RIDE_ONGOING",
+  RIDE_SELECTED = " Service Selected",
+  RIDE_ONGOING = "Service Ongoing",
 }
 
 const cancelContent = [
@@ -30,15 +30,15 @@ const cancelContent = [
   },
   {
     id: 2,
-    title: "Unable to contact driver",
+    title: "Unable to contact person",
   },
   {
     id: 3,
-    title: "Driver denied going to destination",
+    title: "Persond going to destination",
   },
   {
     id: 4,
-    title: "Driver denied coming to pickup",
+    title: "person denied coming to pickup",
   },
   {
     id: 5,
