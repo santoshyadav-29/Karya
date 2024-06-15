@@ -25,16 +25,16 @@ import AppTextInput from "./AppTextInput";
 import AppDatePicker from "./AppDatePicker";
 import AppTimePicker from "./AppTimePicker";
 
-enum ScheduleServiceType {
-  BIKE = "BIKE",
-  CAR = "CAR",
-  BUS = "BUS",
+export enum ScheduleServiceType {
+  PLUMBER = "PLUMBER",
+  ELECTRICIAN = "ELECTRICIAN",
+  BARBER = "BARBER",
 }
 
 const imageMap = {
-  [ScheduleServiceType.BIKE]: require("../assets/bike.png"),
-  [ScheduleServiceType.CAR]: require("../assets/car.png"),
-  [ScheduleServiceType.BUS]: require("../assets/bus.png"),
+  [ScheduleServiceType.PLUMBER]: require("../assets/plumber.png"),
+  [ScheduleServiceType.ELECTRICIAN]: require("../assets/electrician.png"),
+  [ScheduleServiceType.BARBER]: require("../assets/barber.png"),
 };
 
 export default function ScheduleRideScreen({
@@ -106,7 +106,7 @@ export default function ScheduleRideScreen({
       setArtificalLoading(false);
       Alert.alert(
         "Your request has been sent!",
-        "You will be notified when the driver accepts your ride.",
+        "You will be notified when your request has been accepted.",
         [
           {
             text: "OK",
@@ -219,7 +219,7 @@ export default function ScheduleRideScreen({
           </View>
           <AppButton
             textColor="text-white"
-            title="Request Ride"
+            title="Request Service"
             className="bg-primary"
             onPress={handleSubmitPress}
           />
